@@ -20,7 +20,14 @@ const Layout = ({
   toc,
   shareIcons,
 }: LayoutProps) => {
-  const { title, date = "", image } = frontMatter;
+  const {
+    title,
+    date = "",
+    image,
+    readingTime,
+    hide_table_of_contents,
+  } = frontMatter;
+
   const isDesktop = useIsDesktop(1200);
   const titleRef = useRef<HTMLDivElement>(null);
   const blogImageRef = useRef<HTMLImageElement>(null);
@@ -44,7 +51,7 @@ const Layout = ({
 
   return (
     <div className="w-full m-auto flex flex-col gap-4 md:flex-row">
-      {isDesktop && (
+      {isDesktop && !hide_table_of_contents && (
         <div
           className={cx("max-w-[26rem]")}
           style={{ marginTop: !isDesktop ? 0 : marginTop }}
@@ -62,7 +69,7 @@ const Layout = ({
               {description}
             </div> */}
 
-            <div className="mt-6">
+            <div className="mt-6 flex md:flex-row flex-col gap-4">
               {authorDetails.map((author: AuthorDetails) => (
                 <div key={author.slug + author.date}>
                   <div className="flex items-center">
@@ -73,7 +80,7 @@ const Layout = ({
                       height={48}
                       objectFit="cover"
                       onClick={onClickHandler(author)}
-                      className="cursor-pointer"
+                      className="cursor-pointer rounded-full"
                     />
                     <div className="flex flex-col gap-1 items-start justify-start ml-3">
                       <div
@@ -87,18 +94,21 @@ const Layout = ({
                       </div>
                     </div>
                   </div>
-
-                  <div className="mt-4 mb-8 flex items-center gap-1">
-                    <div className="text-xs text-signoz-medium font-semibold">
-                      {getFormattedDate(new Date(date || ""))} ·
-                    </div>
-                    <div className="text-xs text-signoz-medium font-semibold">
-                      {author.readingTime.text}
-                    </div>
-                  </div>
                 </div>
               ))}
             </div>
+
+            <div className="mt-4 flex items-center gap-1">
+              <div className="text-xs text-signoz-medium font-semibold">
+                {getFormattedDate(new Date(date || ""))}
+              </div>
+            </div>
+
+            {readingTime && (
+              <div className="text-xs text-signoz-medium font-semibold mt-4 mb-6">
+                {readingTime.text}
+              </div>
+            )}
 
             <img
               id="cover_image"

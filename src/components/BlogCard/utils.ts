@@ -17,11 +17,95 @@ export const getTags = (tags: BlogCardProps["tags"]) => {
     case "most-recent-post": {
       return "Most Recent Posts";
     }
+    case "product-updates": {
+      return "Product Updates";
+    }
+    case "observability": {
+      return "Observability";
+    }
+    case "tech-resources": {
+      return "Tech Resources";
+    }
+    case "dot-net": {
+      return ".NET";
+    }
+    case "apm": {
+      return "APM";
+    }
+    case "community": {
+      return "Community";
+    }
+    case "database-monitoring": {
+      return "Database Monitoring";
+    }
+    case "distributed-tracing": {
+      return "Distributed Tracing";
+    }
+    case "docker": {
+      return "Docker";
+    }
+    case "elixir-erlang": {
+      return "Elixir/Erlang";
+    }
+    case "go-golang": {
+      return "Go/Golang";
+    }
+    case "jaeger": {
+      return "Jaeger";
+    }
+    case "java": {
+      return "Java";
+    }
+    case "javascript": {
+      return "JavaScript";
+    }
+    case "open-source": {
+      return "Open Source";
+    }
+    case "hero-section": {
+      return "Hero Section";
+    }
+    case "opentelemetry-instrumentation": {
+      return "OpenTelemetry Instrumentation";
+    }
+    case "php": {
+      return "PHP";
+    }
+    case "prometheus": {
+      return "Prometheus";
+    }
+    case "python": {
+      return "Python";
+    }
+    case "ruby": {
+      return "Ruby";
+    }
+    case "rust": {
+      return "Rust";
+    }
+    case "security": {
+      return "Security";
+    }
+    case "signoz": {
+      return "SigNoz";
+    }
+    case "talks": {
+      return "Talks";
+    }
+    case "tech-tutorial": {
+      return "Tech Tutorial";
+    }
+    case "tools-comparison": {
+      return "Tools Comparison";
+    }
+    case "opentelemetry": {
+      return "OpenTelemetry";
+    }
     case "blog-recent-post": {
-      return "Recommended for you";
+      return "Related Posts";
     }
     default: {
-      console.error("Tags is not implemented");
+      console.error(tags, "tag is not implemented");
       return "";
     }
   }

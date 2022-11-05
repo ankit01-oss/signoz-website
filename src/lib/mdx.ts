@@ -98,7 +98,10 @@ export async function getFileBySlug(type: string, slug: string) {
 
   const { code, frontmatter } = await bundleMDX({
     source,
-    cwd: path.join(root, "components"),
+    cwd: path.join(root, 'data'),
+    grayMatterOptions: (options) => {
+      return options;
+    },
     mdxOptions(options) {
       options.remarkPlugins = [
         ...(options.remarkPlugins ?? []),
@@ -157,6 +160,10 @@ export interface FrontMatterProps {
   keywords: string[];
   image: string;
   referencePost?: string[];
+  authors?: string[];
+  fileName?: string;
+  hide_table_of_contents?: boolean;
+  readingTime?: ReadTimeResults;
 }
 
 const getDate = (date: string | null): Date => {
@@ -186,11 +193,13 @@ export async function getAllFilesFrontMatter(folder: string) {
       date,
       draft = false,
       description = "",
-      tags,
-      title,
+      tags = [],
+      title = "",
       slug = "",
       keywords = [],
       image = "",
+      authors = [],
+      hide_table_of_contents = false,
     } = frontmatter;
 
     if (draft !== true) {
@@ -205,6 +214,9 @@ export async function getAllFilesFrontMatter(folder: string) {
         time: readingTime(rest.content),
         keywords,
         image,
+        authors,
+        fileName,
+        hide_table_of_contents,
       });
     }
   });
